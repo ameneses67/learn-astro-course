@@ -1,0 +1,45 @@
+---
+import Globos from "../assets/globos-aerostaticos.png";
+import Jeep from "../assets/jeep.png";
+import Ciudad from "../assets/vista-ciudad.png";
+import Jerome from "../assets/jerome-walton.png";
+import Lewis from "../assets/lewis-daniels.png";
+import Carrie from "../assets/carrie-brewer.png";
+
+import { Image } from "astro:assets";
+
+interface Props {
+  image: {
+    path: ImageMetadata;
+    alt: string;
+  };
+  src: string;
+  alt: string;
+  category: string;
+  title: string;
+  description: string;
+  headshot: {
+    path: ImageMetadata;
+    alt: string;
+  };
+  name: string;
+  date: string;
+}
+
+const { image, category, title, description, headshot, name, date, src, alt } =
+  Astro.props;
+---
+
+<div>
+  <Image src={image.path} alt={image.alt} />
+  <div>
+    <p>{category}</p>
+    <h2>{title}</h2>
+    <p>{description}</p>
+    <div>
+      <Image src={headshot.path} alt={headshot.alt} />
+      <h3>{name}</h3>
+      <p>{date}</p>
+    </div>
+  </div>
+</div>
