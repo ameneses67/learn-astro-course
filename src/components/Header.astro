@@ -1,0 +1,22 @@
+---
+import menuData from "../data/mainMenu.json";
+---
+
+<header class="container mx-auto py-6 px-4 sm:px-8">
+	<nav class="flex items-center justify-between">
+		<a
+			href="/"
+			class="font-extrabold text-xl text-gray-500"
+			>Learn<span class="text-orange-700">Astro</span></a
+		>
+		<ul class="flex gap-4">
+			{
+				menuData.map((menu) => (
+					<li>
+						<a href={menu.path}>{menu.title}</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+</header>
