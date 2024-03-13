@@ -1,0 +1,54 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+	color: "primary" | "secondary";
+	style?: "outline" | "solid";
+	size?: "md" | "lg";
+	block?: boolean;
+	rounded?: boolean;
+	classes?: string;
+}
+
+const {
+	color,
+	style = "solid",
+	size = "md",
+	block,
+	rounded,
+	classes,
+	...rest
+} = Astro.props;
+
+const colors = {
+	primary:
+		"bg-violet-800 hover:bg-violet-900 hover:text-white hover:border-violet-900 border-violet-500 text-violet-500",
+	secondary:
+		"bg-yellow-500 hover:bg-yellow-600 hover:text-white hover:border-yellow-600 border-yellow-500 text-yellow-500",
+};
+
+const styles = {
+	outline: "bg-transparent",
+	solid: "text-white",
+};
+
+const sizes = {
+	md: "px-5 py-2.5",
+	lg: "px-6 py-3 text-lg",
+};
+---
+
+<button
+	class:list={twMerge([
+		"flex items-center gap-2 rounded text-center font-bold border-2 transition",
+		colors[color],
+		styles[style],
+		sizes[size],
+		block && "w-full",
+		rounded && "rounded-3xl",
+		classes,
+	])}
+	{...rest}
+>
+	<slot />
+</button>

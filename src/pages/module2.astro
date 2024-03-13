@@ -1,16 +1,35 @@
 ---
+import { Icon } from "astro-icon/components";
+
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 import Heading from "../components/Heading.astro";
+import PriceCard from "../components/PriceCard.astro";
+import Button from "../components/Button.astro";
 ---
 
 <BaseLayout title="Module 2">
 	<Heading
 		tagName="h1"
 		size="h1"
+		align="center"
 		id="title"
 		aria-label="title"
 	>
 		Module 2
 	</Heading>
+	<Button
+		color="secondary"
+		style="outline"
+		block
+		rounded
+	>
+		Botón <Icon
+			name="radix-icons:check"
+			class="font-bold"
+		/>
+	</Button>
+	<section class="flex gap-8">
+		<PriceCard color="pro" />
+	</section>
 </BaseLayout>

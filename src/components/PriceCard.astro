@@ -1,0 +1,29 @@
+---
+import { twMerge } from "tailwind-merge";
+
+import data from "../data/priceCardData.json";
+
+interface Props {
+	color: keyof typeof colors;
+}
+
+const colors = {
+	pro: "bg-violet-800 text-white",
+	enterprise: "bg-yellow-500 text-white",
+};
+
+const { color } = Astro.props;
+---
+
+{
+	data.map((card) => (
+		<article class="rounded-lg shadow-xl bg-white overflow-hidden">
+			<div>
+				<p class:list={twMerge(["text-center uppercase", colors[color]])}>
+					{card.tier}
+				</p>
+				{card.most_popular && <p>most popular</p>}
+			</div>
+		</article>
+	))
+}

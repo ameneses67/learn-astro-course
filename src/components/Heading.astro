@@ -1,5 +1,6 @@
 ---
 import { type HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
 
 const headingOptions = {
 	h1: "text-7xl",
@@ -10,23 +11,35 @@ const headingOptions = {
 	h6: "text-2xl",
 };
 
+const textAlign = {
+	left: "text-left",
+	center: "text-center",
+	right: "text-right",
+};
+
 interface Props extends HTMLAttributes<keyof typeof headingOptions> {
 	tagName: keyof typeof headingOptions;
 	size: keyof typeof headingOptions;
-	centered?: boolean;
+	align: keyof typeof textAlign;
 	hclasses?: string;
 	classes?: string;
 }
 
-const { tagName, size, centered, hclasses, classes, ...rest } = Astro.props;
+const { tagName, size, align, hclasses, classes, ...rest } = Astro.props;
 const Tag = tagName;
 ---
 
 <div
-	class:list={["text-xl space-y-4", { "text-center": centered }, classes]}
+	class:list={twMerge(["text-xl space-y-4", textAlign[align], classes])}
 	{...rest}
 >
-	<Tag class:list={["leading-[1.1] font-bold", headingOptions[size], hclasses]}>
+	<Tag
+		class:list={twMerge([
+			"leading-[1.1] font-bold",
+			headingOptions[size],
+			hclasses,
+		])}
+	>
 		<slot />
 	</Tag>
 	<slot name="subtitle" />
