@@ -1,12 +1,15 @@
 ---
-import { twMerge } from "tailwind-merge";
+import type { HTMLAttributes } from "astro/types";
+import type { Card } from "@pages/module2.astro";
 
-interface Props {
-	color: "primary" | "secondary";
-	style?: "outline" | "solid";
-	size?: "md" | "lg";
-	block?: boolean;
+import { cn } from "@lib/utils";
+
+interface Props extends HTMLAttributes<"button"> {
+	color: Card["tier"];
+	style?: keyof typeof styles;
+	size?: keyof typeof sizes;
 	rounded?: boolean;
+	block?: boolean;
 	classes?: string;
 }
 
@@ -14,41 +17,39 @@ const {
 	color,
 	style = "solid",
 	size = "md",
-	block,
 	rounded,
+	block,
 	classes,
 	...rest
 } = Astro.props;
 
-const colors = {
-	primary:
-		"bg-violet-800 hover:bg-violet-900 hover:text-white hover:border-violet-900 border-violet-500 text-violet-500",
-	secondary:
-		"bg-yellow-500 hover:bg-yellow-600 hover:text-white hover:border-yellow-600 border-yellow-500 text-yellow-500",
-};
-
 const styles = {
-	outline: "bg-transparent",
+	outline: "bg-transparent hover:text-white",
 	solid: "text-white",
 };
 
 const sizes = {
-	md: "px-5 py-2.5",
-	lg: "px-6 py-3 text-lg",
+	md: "px-5 py-1.5",
+	lg: "px-6 py-2 text-lg",
 };
 ---
 
 <button
-	class:list={twMerge([
-		"flex items-center gap-2 rounded text-center font-bold border-2 transition",
-		colors[color],
+	{...rest}
+	class:list={cn(
+		"flex justify-center items-center gap-2 rounded font-semibold capitalize border-2 transition",
+		color.toLowerCase() === "free" &&
+			"bg-black border-black hover:bg-gray-800 hover:border-gray-800",
+		color.toLowerCase() === "pro" &&
+			"bg-violet-800 border-violet-800 text-violet-800 hover:bg-violet-900 hover:border-violet-900",
+		color.toLowerCase() === "enterprise" &&
+			"bg-yellow-500 border-yellow-500 text-yellow-500 hover:bg-yellow-600 hover:border-yellow-600",
 		styles[style],
 		sizes[size],
-		block && "w-full",
 		rounded && "rounded-3xl",
-		classes,
-	])}
-	{...rest}
+		block && "w-full",
+		classes
+	)}
 >
 	<slot />
 </button>

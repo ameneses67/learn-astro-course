@@ -1,0 +1,75 @@
+---
+import { Image } from "astro:assets";
+
+import type { HTMLAttributes } from "astro/types";
+import type { BlogCard } from "@pages/index.astro";
+
+import { cn } from "@lib/utils";
+
+import Heading from "@components/Heading.astro";
+
+interface Props extends HTMLAttributes<"article"> {
+	data: BlogCard;
+}
+
+const { data } = Astro.props;
+
+const {
+	imageSrc,
+	imageAlt,
+	category,
+	title,
+	description,
+	headshotSrc,
+	headshotAlt,
+	name,
+	date,
+} = data;
+---
+
+<article class="bg-white rounded-xl overflow-hidden shadow w-full max-w-sm">
+	<div class="h-48 sm:h-40 md:h-32 lg:h-44 xl:h-48">
+		<Image
+			src={imageSrc}
+			alt={imageAlt}
+			inferSize={true}
+			class="w-full h-full object-cover"
+		/>
+	</div>
+	<div class="p-4">
+		<div class="space-y-2">
+			<p
+				class:list={cn(
+					"text-white rounded-3xl uppercase text-xs px-4 py-1 inline-block",
+					category.toLowerCase() === "technology" && "bg-sky-500",
+					category.toLowerCase() === "popular" && "bg-rose-500",
+					category.toLowerCase() === "design" && "bg-amber-500"
+				)}
+			>
+				{category}
+			</p>
+			<Heading
+				tagName="h3"
+				size="h6"
+				align="left"
+				hclasses="leading-7"
+				classes="text-sm"
+			>
+				{title}
+				<p slot="subtitle">{description}</p>
+			</Heading>
+		</div>
+		<div class="flex gap-2 items-center">
+			<Image
+				src={headshotSrc}
+				alt={headshotAlt}
+				inferSize={true}
+				class="w-10 h-10 rounded-full border-stone-800 border-1"
+			/>
+			<div>
+				<h3 class="font-bold">{name}</h3>
+				<p class="text-xs text-stone-600">{date}</p>
+			</div>
+		</div>
+	</div>
+</article>

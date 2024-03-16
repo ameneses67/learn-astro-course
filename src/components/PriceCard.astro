@@ -1,29 +1,88 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+import type { Card } from "@pages/module2.astro";
+
+import { Icon } from "astro-icon/components";
+
 import { twMerge } from "tailwind-merge";
 
-import data from "../data/priceCardData.json";
+import Button from "@components/Button.astro";
+import Heading from "@components/Heading.astro";
 
-interface Props {
-	color: keyof typeof colors;
+interface Props extends HTMLAttributes<"article"> {
+	data: Card;
 }
 
-const colors = {
-	pro: "bg-violet-800 text-white",
-	enterprise: "bg-yellow-500 text-white",
-};
+const { data } = Astro.props;
 
-const { color } = Astro.props;
+const {
+	tier,
+	most_popular,
+	amount_per_month,
+	title,
+	description,
+	btn_text,
+	features,
+} = data;
 ---
 
-{
-	data.map((card) => (
-		<article class="rounded-lg shadow-xl bg-white overflow-hidden">
-			<div>
-				<p class:list={twMerge(["text-center uppercase", colors[color]])}>
-					{card.tier}
+<article
+	class="rounded-lg shadow-xl bg-white overflow-hidden text-center w-full max-w-72"
+>
+	<div class="space-y-2 h-20">
+		<Button
+			color={tier.toLowerCase()}
+			style={tier.toLowerCase() === "free" ? "outline" : "solid"}
+			size="lg"
+			block
+			classes={twMerge(["border-transparent rounded-none cursor-default"])}
+		>
+			{tier}
+		</Button>
+		{
+			most_popular && (
+				<p class="uppercase px-2 py-1 text-xs bg-black text-white max-w-fit mx-auto">
+					most popular
 				</p>
-				{card.most_popular && <p>most popular</p>}
-			</div>
-		</article>
-	))
-}
+			)
+		}
+	</div>
+	<div class="p-8 space-y-4">
+		<div class="font-semiboldbold flex justify-center gap-1">
+			<p class="font-semibold">$</p>
+			<p class="text-7xl font-bold">{amount_per_month}</p>
+			<p class="self-end">{amount_per_month > 0 && "/mo"}</p>
+		</div>
+		<Heading
+			tagName="h3"
+			size="h6"
+			align="center"
+			hclasses="uppercase font-semibold text-xl"
+		>
+			{title}
+		</Heading>
+		<p>{description}</p>
+	</div>
+	<div class="px-8">
+		<Button
+			color={tier.toLowerCase()}
+			style={tier.toLowerCase() === "pro" ? "solid" : "outline"}
+			block
+		>
+			{btn_text}
+		</Button>
+	</div>
+	<ul class="max-w-fit py-8 mx-auto text-sm font-semibold space-y-2">
+		{
+			features.map((feature) => (
+				<li class="flex items-center gap-2">
+					<Icon
+						name={feature.checked ? "radix-icons:check" : "radix-icons:cross-2"}
+						class={feature.checked ? "text-green-600" : "text-red-600"}
+					/>
+					<p class="text-sm font-semibold">{feature.title}</p>
+				</li>
+			))
+		}
+	</ul>
+</article>

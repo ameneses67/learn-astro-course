@@ -1,11 +1,23 @@
 ---
-import { Icon } from "astro-icon/components";
+import data from "@data/priceCardData.json";
 
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
-import Heading from "../components/Heading.astro";
-import PriceCard from "../components/PriceCard.astro";
-import Button from "../components/Button.astro";
+import Heading from "@components/Heading.astro";
+import PriceCard from "@components/PriceCard.astro";
+
+export type Card = {
+	tier: string;
+	most_popular: boolean;
+	amount_per_month: number;
+	title: string;
+	description: string;
+	btn_text: string;
+	features: {
+		title: string;
+		checked: boolean;
+	}[];
+};
 ---
 
 <BaseLayout title="Module 2">
@@ -18,18 +30,7 @@ import Button from "../components/Button.astro";
 	>
 		Module 2
 	</Heading>
-	<Button
-		color="secondary"
-		style="outline"
-		block
-		rounded
-	>
-		Botón <Icon
-			name="radix-icons:check"
-			class="font-bold"
-		/>
-	</Button>
-	<section class="flex gap-8">
-		<PriceCard color="pro" />
+	<section class="flex justify-center flex-wrap gap-8">
+		{data.map((card: Card) => <PriceCard data={card} />)}
 	</section>
 </BaseLayout>
