@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import BlogCard from "@components/BlogCard.astro";
+import Heading from "@components/Heading.astro";
+
+import data from "@data/blogCardData.json";
+
+export type BlogCard = {
+	imageSrc: string;
+	imageAlt: string;
+	category: string;
+	title: string;
+	description: string;
+	headshotSrc: string;
+	headshotAlt: string;
+	name: string;
+	date: string;
+};
+
+const title = "Módulo 1";
+const description = "Básicos de Astro";
+---
+
+<BaseLayout
+	{title}
+	{description}
+>
+	<Heading
+		tagName="h1"
+		size="h1"
+		align="center"
+	>
+		{title}
+		<p slot="subtitle">{description}</p>
+	</Heading>
+	<section
+		class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center items-stretch gap-x-8 gap-y-12 max-w-5xl mx-auto"
+	>
+		{data.map((card) => <BlogCard data={card} />)}
+	</section>
+</BaseLayout>

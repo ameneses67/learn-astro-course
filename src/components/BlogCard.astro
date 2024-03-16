@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 
 import type { HTMLAttributes } from "astro/types";
-import type { BlogCard } from "@pages/index.astro";
+import type { BlogCard } from "@pages/module1.astro";
 
 import { cn } from "@lib/utils";
 
@@ -27,7 +27,7 @@ const {
 } = data;
 ---
 
-<article class="bg-white rounded-xl overflow-hidden shadow w-full max-w-sm">
+<!-- <article class="bg-white rounded-xl overflow-hidden shadow w-full max-w-sm">
 	<div class="h-48 sm:h-40 md:h-32 lg:h-44 xl:h-48">
 		<Image
 			src={imageSrc}
@@ -72,4 +72,49 @@ const {
 			</div>
 		</div>
 	</div>
-</article>
+</article> -->
+<div class="card max-w-sm bg-base-100 shadow-xl">
+	<figure>
+		<img
+			src={imageSrc}
+			alt={imageAlt}
+			class="h-48 sm:h-40 md:h-32 lg:h-44 xl:h-48 w-full object-cover"
+		/>
+	</figure>
+	<!-- <Image
+		src={imageSrc}
+		alt={imageAlt}
+		inferSize={true}
+		class="w-full h-full object-cover"
+	/> -->
+	<div class="card-body">
+		<div
+			class:list={cn(
+				"badge",
+				category.toLowerCase() === "technology" && "badge-info",
+				category.toLowerCase() === "popular" && "badge-success",
+				category.toLowerCase() === "design" && "badge-warning"
+			)}
+		>
+			{category}
+		</div>
+		<h2 class="card-title">
+			{title}
+		</h2>
+		<p>{description}</p>
+		<div class="flex gap-2 items-center mt-2">
+			<div class="avatar">
+				<div class="w-10 rounded-full">
+					<img
+						src={headshotSrc}
+						alt={headshotAlt}
+					/>
+				</div>
+			</div>
+			<div>
+				<h3 class="font-bold">{name}</h3>
+				<p class="text-xs">{date}</p>
+			</div>
+		</div>
+	</div>
+</div>

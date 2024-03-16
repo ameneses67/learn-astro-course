@@ -2,8 +2,8 @@
 import menuData from "@data/mainMenu.json";
 ---
 
-<header class="container mx-auto py-6 px-4 sm:px-8">
-	<nav class="flex items-center justify-between">
+<header class="bg-base-200">
+	<!-- <nav class="flex items-center justify-between">
 		<a
 			href="/"
 			class="font-extrabold text-xl text-gray-500"
@@ -11,12 +11,62 @@ import menuData from "@data/mainMenu.json";
 		>
 		<ul class="flex gap-4">
 			{
-				menuData.map((menu) => (
+				menuData.main.map((menu) => (
 					<li>
 						<a href={menu.path}>{menu.title}</a>
 					</li>
 				))
 			}
+			<div class="dropdown dropdown-hover">
+				<div
+					tabindex="0"
+					role="button"
+					class="btn m-1"
+				>
+					Módulos
+				</div>
+				<ul
+					tabindex="0"
+					class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+				>
+					<li><a>Item 1</a></li>
+					<li><a>Item 2</a></li>
+				</ul>
+			</div>
 		</ul>
-	</nav>
+	</nav> -->
+	<div class="navbar">
+		<div class="flex-1">
+			<a
+				href="/"
+				class="btn btn-ghost text-sm sm:text-xl gap-0"
+				>learn<span class="text-accent uppercase">Astro</span></a
+			>
+		</div>
+		<div class="flex-none">
+			<ul class="menu sm:menu-lg menu-horizontal px-1">
+				{
+					menuData.main.map((menu) => (
+						<li>
+							<a href={menu.path}>{menu.title}</a>
+						</li>
+					))
+				}
+				<li>
+					<details>
+						<summary> Módulos </summary>
+						<ul class="p-2 bg-base-100 rounded-t-none !-ms-2">
+							{
+								menuData.modules.map((module) => (
+									<li>
+										<a href={module.path}>{module.title}</a>
+									</li>
+								))
+							}
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</div>
+	</div>
 </header>

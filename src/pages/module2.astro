@@ -18,9 +18,15 @@ export type Card = {
 		checked: boolean;
 	}[];
 };
+
+const title = "Módulo 2";
+const description = "Componentes de Astro";
 ---
 
-<BaseLayout title="Module 2">
+<BaseLayout
+	{title}
+	{description}
+>
 	<Heading
 		tagName="h1"
 		size="h1"
@@ -28,7 +34,8 @@ export type Card = {
 		id="title"
 		aria-label="title"
 	>
-		Module 2
+		{title}
+		<p slot="subtitle">{description}</p>
 	</Heading>
 	<section class="flex justify-center flex-wrap gap-8">
 		{data.map((card: Card) => <PriceCard data={card} />)}

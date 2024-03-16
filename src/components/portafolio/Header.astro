@@ -1,0 +1,46 @@
+---
+import { Icon } from "astro-icon/components";
+
+const navMenu = [
+	{
+		title: "proyectos",
+		path: "/proyectos",
+	},
+	{
+		title: "inicio",
+		path: "/",
+		icon: "logomark",
+	},
+	{
+		title: "artículos",
+		path: "/blog",
+	},
+];
+---
+
+<header class="bg-base-200">
+	<nav class="navbar">
+		<ul class="menu sm:menu-lg menu-horizontal mx-auto">
+			{
+				navMenu.map((menu) => (
+					<li>
+						<a
+							href={menu.path}
+							aria-label={menu.icon && menu.title}
+							class="capitalize"
+						>
+							{!menu.icon && menu.title}
+							{menu.icon && (
+								<Icon
+									name={menu.icon}
+									size={48}
+									aria-hidden="true"
+								/>
+							)}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+</header>
