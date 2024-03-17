@@ -1,10 +1,24 @@
 ---
+import { Image } from "astro:assets";
+
 import Heading from "@components/Heading.astro";
 import Link from "./ui/Link.astro";
+
+import karina from "@assets/avatar.jpg";
 ---
 
 <div class="hero min-h-screen bg-base-200">
 	<div class="hero-content flex-col text-center space-y-8">
+		<div class="avatar">
+			<Image
+				src={karina}
+				alt="Karina Hernández"
+				widths={[200, 300]}
+				sizes={`(max-width: 768px) 200px, 300px`}
+				format="avif"
+				class="rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+			/>
+		</div>
 		<Heading
 			tagName="h1"
 			size="h2"
@@ -13,7 +27,8 @@ import Link from "./ui/Link.astro";
 		>
 			👋 Hola, soy Karina
 			<p slot="subtitle">
-				Soy una diseñadora y desarrolladora web obsesionada con la calidad.
+				Soy una diseñadora y desarrolladora web autodidacta obsesionada con la
+				calidad.
 			</p>
 		</Heading>
 		<div class="flex flex-col md:flex-row gap-4">
