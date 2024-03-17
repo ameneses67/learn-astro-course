@@ -9,7 +9,7 @@
 			"@layouts/*": ["src/layouts/*"],
 			"@lib/*": ["src/lib/*"],
 			"@pages/*": ["src/pages/*"],
-			"@ui/*": ["src/components/ui/*"]
+			"@ui/*": ["src/components/portafolio/ui/*"]
 		}
 	}
 }

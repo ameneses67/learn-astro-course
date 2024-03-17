@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+
+import Heading from "@components/Heading.astro";
+import ProjectCard from "@ui/ProjectCard.astro";
+import Link from "@ui/Link.astro";
+
+const projects = await getCollection("projects");
+---
+
+<sectio
+	aria-label="Proyectos recientes"
+	class="flex flex-col items-center gap-16 py-16 sm:py-32 px-4 sm:px-16"
+>
+	<Heading
+		tagName="h2"
+		size="h2"
+		align="center"
+		classes="max-w-lg"
+	>
+		Si no confías en mi palabra
+		<p slot="subtitle">
+			Estos son unos de los sitios web y aplicaciones más recientes que he
+			realizado.
+		</p>
+	</Heading>
+	<Link
+		href="/proyectos"
+		variant="primary"
+		size="wide"
+		outline
+		rounded
+	>
+		Todos los proyectos
+	</Link>
+	<div class="flex flex-col lg:flex-row gap-8">
+		{projects.slice(0, 3).map(({ data }) => <ProjectCard projectData={data} />)}
+	</div>
+</sectio>
