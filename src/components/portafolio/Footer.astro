@@ -1,0 +1,49 @@
+---
+import { Icon } from "astro-icon/components";
+
+import { socialData } from "@data/portafolioData";
+---
+
+<footer class="footer p-10 bg-neutral text-neutral-content">
+	<aside class="max-w-sm">
+		<Icon
+			name="logomark"
+			size={48}
+		/>
+		<p>
+			&copy; <span id="copyright"></span> Karina Hernández. Derechos Reservados.
+		</p>
+		<p>
+			Soy una desarrolladora web apasionada por crear sitios web innovadores y
+			amigables para el usuario.
+		</p>
+	</aside>
+	<nav>
+		<h6 class="footer-title ml-6 hidden md:block">Social</h6>
+		<ul class="menu menu-horizontal">
+			{
+				socialData.map((social) => (
+					<li>
+						<a
+							href={social.href}
+							aria-label={social.title}
+							title={social.title}
+						>
+							{
+								<Icon
+									name={social.icon}
+									size={24}
+								/>
+							}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+</footer>
+
+<script>
+	const copyright = document.querySelector("#copyright") as HTMLSpanElement;
+	copyright.textContent = new Date().getFullYear().toString();
+</script>
