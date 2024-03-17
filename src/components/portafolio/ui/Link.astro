@@ -32,6 +32,7 @@ const { href, variant, outline, rounded, size, ...rest } = Astro.props;
 		size === "wide" && "btn-wide",
 		size === "full" && "btn-block"
 	)}
+	role="button"
 	{...rest}
 >
 	<slot />

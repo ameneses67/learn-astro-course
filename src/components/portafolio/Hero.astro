@@ -1,21 +1,39 @@
 ---
+import Heading from "@components/Heading.astro";
 import Link from "./ui/Link.astro";
 ---
 
-<Link
-	href="#"
-	variant="primary"
-	outline
-	rounded
-	size="wide"
->
-	Download CV
-</Link>
-<Link
-	href="#contact"
-	variant="secondary"
-	rounded
-	size="wide"
->
-	Contacto
-</Link>
+<div class="hero min-h-screen bg-base-200">
+	<div class="hero-content flex-col text-center space-y-8">
+		<Heading
+			tagName="h1"
+			size="h2"
+			align="center"
+			classes="max-w-md md:max-w-xl"
+		>
+			👋 Hola, soy Karina
+			<p slot="subtitle">
+				Soy una diseñadora y desarrolladora web obsesionada con la calidad.
+			</p>
+		</Heading>
+		<div class="flex flex-col md:flex-row gap-4">
+			<Link
+				href="#"
+				variant="primary"
+				outline
+				rounded
+				size="wide"
+			>
+				Download CV
+			</Link>
+			<Link
+				href="#contact"
+				variant="secondary"
+				rounded
+				size="wide"
+			>
+				Contacto
+			</Link>
+		</div>
+	</div>
+</div>

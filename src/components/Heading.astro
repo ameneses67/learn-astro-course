@@ -3,12 +3,12 @@ import { type HTMLAttributes } from "astro/types";
 import { twMerge } from "tailwind-merge";
 
 const headingOptions = {
-	h1: "text-7xl",
-	h2: "text-6xl",
-	h3: "text-5xl",
-	h4: "text-4xl",
-	h5: "text-3xl",
-	h6: "text-2xl",
+	h1: "text-5xl sm:text-7xl",
+	h2: "text-4xl sm:text-6xl",
+	h3: "text-3xl sm:text-5xl",
+	h4: "text-2xl sm:text-4xl",
+	h5: "text-xl sm:text-3xl",
+	h6: "text-lg sm:text-2xl",
 };
 
 const textAlign = {
@@ -30,7 +30,11 @@ const Tag = tagName;
 ---
 
 <div
-	class:list={twMerge(["text-xl space-y-4", textAlign[align], classes])}
+	class:list={twMerge([
+		"text-lg sm:text-2xl space-y-4",
+		textAlign[align],
+		classes,
+	])}
 	{...rest}
 >
 	<Tag
