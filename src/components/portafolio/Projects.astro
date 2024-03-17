@@ -8,9 +8,9 @@ import Link from "@ui/Link.astro";
 const projects = await getCollection("projects");
 ---
 
-<sectio
+<section
 	aria-label="Proyectos recientes"
-	class="flex flex-col items-center gap-16 py-16 sm:py-32 px-4 sm:px-16"
+	class="flex flex-col items-center gap-16 py-16 sm:py-32 px-4 sm:px-16 bg-base-200"
 >
 	<Heading
 		tagName="h2"
@@ -36,4 +36,4 @@ const projects = await getCollection("projects");
 	<div class="flex flex-col lg:flex-row gap-8">
 		{projects.slice(0, 3).map(({ data }) => <ProjectCard projectData={data} />)}
 	</div>
-</sectio>
+</section>
