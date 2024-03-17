@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+
+import Heading from "@components/Heading.astro";
+import { Icon } from "astro-icon/components";
+
+const features = await getCollection("features");
+---
+
+<section
+	aria-label="Características"
+	class="flex flex-col items-center gap-16 py-16 sm:py-32 px-4 sm:px-16 bg-accent text-accent-content"
+>
+	<Heading
+		tagName="h2"
+		size="h3"
+		align="center"
+		classes="max-w-lg"
+	>
+		Sitios web rápidos, pulcros y modernos
+	</Heading>
+	<ul class="flex flex-col lg:flex-row gap-16 max-w-md lg:max-w-none">
+		{
+			features.map(({ data }) => (
+				<li class="space-y-4 w-full max-w-small sm:max-w-md">
+					<Icon
+						name={data.icon}
+						size={64}
+						class="mx-auto"
+					/>
+					<Heading
+						tagName="h3"
+						size="h4"
+						align="center"
+					>
+						{data.title}
+						<p slot="subtitle">{data.description}</p>
+					</Heading>
+				</li>
+			))
+		}
+	</ul>
+</section>
