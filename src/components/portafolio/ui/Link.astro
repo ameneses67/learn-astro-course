@@ -1,0 +1,38 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import { cn } from "@lib/utils";
+
+interface Props extends HTMLAttributes<"a"> {
+	href: string;
+	variant?: "accent" | "primary" | "secondary" | "ghost" | "link" | "badge";
+	outline?: boolean;
+	rounded?: boolean;
+	size?: "xs" | "sm" | "md" | "lg" | "wide" | "full";
+}
+
+const { href, variant, outline, rounded, size, ...rest } = Astro.props;
+---
+
+<a
+	{href}
+	class:list={cn(
+		"btn",
+		variant === "primary" && "btn-primary",
+		variant === "secondary" && "btn-secondary",
+		variant === "accent" && "accent",
+		variant === "ghost" && "btn-ghost",
+		variant === "link" && "btn-link",
+		outline && "btn-outline",
+		rounded && "rounded-3xl",
+		size === "xs" && "btn-xs",
+		size === "sm" && "btn-sm",
+		size === "md" && "btn-md",
+		size === "lg" && "btn-lg",
+		size === "wide" && "btn-wide",
+		size === "full" && "btn-block"
+	)}
+	{...rest}
+>
+	<slot />
+</a>
