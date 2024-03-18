@@ -1,5 +1,25 @@
 ---
-import ContactForm from "./ui/ContactForm.astro";
+import { Image } from "astro:assets";
+
+import ContactForm from "@ui/ContactForm.astro";
+
+import karina from "@assets/avatar.jpg";
 ---
 
-<ContactForm />
+<section
+	aria-label="Formulario de contacto"
+	class="flex flex-col items-center gap-16 py-16 sm:py-32 px-4 sm:px-16"
+>
+	<div
+		class="flex flex-col lg:flex-row justify-center items-center -space-y-16 lg:space-y-0 lg:-space-x-8"
+	>
+		<Image
+			src={karina}
+			alt="Karina Hernández"
+			width={400}
+			format="avif"
+			class="rounded-lg"
+		/>
+		<ContactForm />
+	</div>
+</section>

@@ -1,10 +1,46 @@
 ---
-
+import Heading from "@components/Heading.astro";
 ---
 
-<form>
-	<button>Submit</button>
-</form>
+<div class="max-w-sm bg-base-200 p-8 space-y-8 rounded-lg shadow-lg">
+	<Heading
+		tagName="h3"
+		size="h4"
+		align="left"
+	>
+		¡Conectemos!
+		<p slot="subtitle">
+			Comunícate a continuación para consultas, cotizaciones o colaboración.
+		</p>
+	</Heading>
+	<form class="space-y-4">
+		<label class="form-control w-full">
+			<div class="label">
+				<span class="label-text">Nombre</span>
+			</div>
+			<input
+				type="text"
+				placeholder="Primer nombre"
+				class="input input-secondary input-bordered w-full rounded-3xl"
+			/>
+		</label>
+		<label class="form-control w-full">
+			<div class="label">
+				<span class="label-text">Correo electrónico</span>
+			</div>
+			<input
+				type="email"
+				placeholder="nombre@correo.com"
+				class="input input-secondary input-bordered w-full rounded-3xl"
+			/>
+		</label>
+		<button
+			type="submit"
+			class="btn btn-secondary btn-block rounded-3xl"
+			>Contáctame</button
+		>
+	</form>
+</div>
 
 <script>
 	const form = document.querySelector("form") as HTMLFormElement;
