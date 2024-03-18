@@ -1,0 +1,18 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	message: string;
+	icon: string;
+}
+
+const { message, icon } = Astro.props;
+---
+
+<div
+	role="alert"
+	class="alert"
+>
+	<Icon name={icon} />
+	<span>{message}</span>
+</div>
