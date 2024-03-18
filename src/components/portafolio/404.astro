@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+
+import Heading from "@components/Heading.astro";
+import Link from "@ui/Link.astro";
+
+import karina from "@assets/avatar.jpg";
+---
+
+<div class="hero min-h-screen bg-base-200">
+	<div class="hero-content flex-col text-center space-y-8">
+		<div class="avatar">
+			<Image
+				src={karina}
+				alt="Karina Hernández"
+				widths={[200, 300]}
+				sizes={`(max-width: 768px) 200px, 300px`}
+				format="avif"
+				class="rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+			/>
+		</div>
+		<Heading
+			tagName="h1"
+			size="h2"
+			align="center"
+			classes="max-w-md md:max-w-xl"
+		>
+			👋 ¿Andas perdido?
+			<p slot="subtitle">
+				¡Oops! La página que andas buscando parece que no existe. Por favor
+				intenta de nuevo o visita la página de inicio para mayor información.
+			</p>
+		</Heading>
+		<div class="flex flex-col md:flex-row gap-4">
+			<Link
+				href="/"
+				variant="secondary"
+				rounded
+				size="wide"
+			>
+				Ir al Inicio
+			</Link>
+		</div>
+	</div>
+</div>
