@@ -18,7 +18,9 @@ const { title, thumbnail, url, icons } = projectData;
 const iconsData = await getEntries(icons);
 ---
 
-<div class="card card-compact w-full bg-base-100 shadow-xl overflow-hidden">
+<div
+	class="card card-compact w-full max-w-sm bg-base-100 shadow-xl overflow-hidden"
+>
 	<a
 		href={url}
 		target="_blank"

@@ -1,0 +1,28 @@
+---
+import Heading from "@components/Heading.astro";
+import Contact from "@components/portafolio/Contact.astro";
+import ProjectsGrid from "@components/portafolio/ui/ProjectsGrid.astro";
+
+import PortafolioLayout from "@layouts/PortafolioLayout.astro";
+---
+
+<PortafolioLayout>
+	<section
+		class="py-16 sm:py-32 px-4 sm:px-16 space-y-16 sm:space-y-32 bg-base-300"
+	>
+		<Heading
+			tagName="h1"
+			size="h2"
+			align="center"
+			classes="max-w-sm sm:max-w-2xl mx-auto"
+		>
+			Proyectos
+			<p slot="subtitle">
+				Aquí hay algunos sitios web y aplicaciones recientes que puedes explorar
+				por ti mismo.
+			</p>
+		</Heading>
+		<ProjectsGrid />
+	</section>
+	<Contact />
+</PortafolioLayout>
