@@ -9,9 +9,10 @@ interface Props extends HTMLAttributes<"a"> {
 	outline?: boolean;
 	rounded?: boolean;
 	size?: "xs" | "sm" | "md" | "lg" | "wide" | "full";
+	classes?: string;
 }
 
-const { href, variant, outline, rounded, size, ...rest } = Astro.props;
+const { href, variant, outline, rounded, size, classes, ...rest } = Astro.props;
 ---
 
 <a
@@ -30,7 +31,8 @@ const { href, variant, outline, rounded, size, ...rest } = Astro.props;
 		size === "md" && "btn-md",
 		size === "lg" && "btn-lg",
 		size === "wide" && "btn-wide",
-		size === "full" && "btn-block"
+		size === "full" && "btn-block",
+		classes
 	)}
 	role="button"
 	{...rest}

@@ -1,0 +1,65 @@
+---
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+
+import Heading from "@components/Heading.astro";
+
+import Link from "@ui/Link.astro";
+
+const allTools = await getCollection("tools");
+---
+
+<div class="space-y-8">
+	<div class="flex items-center gap-8">
+		<Heading
+			tagName="h3"
+			size="h6"
+			align="left"
+		>
+			Filtrar por herramientas
+		</Heading>
+		<Link
+			href=""
+			variant="secondary"
+			rounded
+			size="xs"
+			classes="relative"
+			aria-pressed="true"
+			data-tool="t.id"
+		>
+			Borrar filtros
+			<Icon
+				name="icon--close"
+				aria-hidden="true"
+				size={18}
+				class="bg-secondary text-secondary-content rounded-full absolute -top-2 -right-2 border-2 border-base-300"
+			/>
+		</Link>
+	</div>
+	<ul class="flex flex-wrap gap-4">
+		{
+			allTools.map(({ data }) => (
+				<li>
+					<Link
+						href=""
+						variant="secondary"
+						outline
+						rounded
+						size="xs"
+						classes="relative"
+						aria-pressed="true"
+						data-tool="t.id"
+					>
+						{data.title}
+						<Icon
+							name="icon--close"
+							aria-hidden="true"
+							size={18}
+							class="bg-secondary text-secondary-content rounded-full absolute -top-2 -right-2 border-2 border-base-300"
+						/>
+					</Link>
+				</li>
+			))
+		}
+	</ul>
+</div>
