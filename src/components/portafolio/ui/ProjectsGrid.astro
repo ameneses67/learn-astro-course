@@ -1,9 +1,20 @@
 ---
-import { getCollection, getEntries, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+import { getSearchParamsAsArray } from "@lib/utils";
 
 import ProjectCard from "@components/portafolio/ui/ProjectCard.astro";
 
-const projects = await getCollection("projects");
+let projects = await getCollection("projects");
+
+const filterItems = getSearchParamsAsArray(Astro.url, "tools");
+
+if (filterItems.length > 0) {
+	projects = projects.filter((project) => {
+		const projectTools = project.data.icons.map((icon) => icon.id);
+		return filterItems.some((i) => projectTools.includes(i));
+	});
+}
 ---
 
 <div

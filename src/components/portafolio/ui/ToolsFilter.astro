@@ -2,11 +2,14 @@
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 
-import Heading from "@components/Heading.astro";
+import { cn, getSearchParamsAsArray } from "@lib/utils";
 
+import Heading from "@components/Heading.astro";
 import Link from "@ui/Link.astro";
 
 const allTools = await getCollection("tools");
+
+const filterItems = getSearchParamsAsArray(Astro.url, "tools");
 ---
 
 <div class="space-y-8">
@@ -18,45 +21,52 @@ const allTools = await getCollection("tools");
 		>
 			Filtrar por herramientas
 		</Heading>
-		<Link
-			href=""
-			variant="secondary"
-			rounded
-			size="xs"
-			classes="relative"
-			aria-pressed="true"
-			data-tool="t.id"
-		>
-			Borrar filtros
-			<Icon
-				name="icon--close"
-				aria-hidden="true"
-				size={18}
-				class="bg-secondary text-secondary-content rounded-full absolute -top-2 -right-2 border-2 border-base-300"
-			/>
-		</Link>
+		{
+			filterItems.length > 0 && (
+				<Link
+					href=""
+					variant="secondary"
+					rounded
+					size="xs"
+					classes="relative"
+					aria-pressed="true"
+				>
+					Reiniciar filtros
+					<Icon
+						name="icon--close"
+						aria-hidden="true"
+						size={18}
+						class="bg-secondary text-secondary-content rounded-full absolute -top-2 -right-2 border-2 border-base-300"
+					/>
+				</Link>
+			)
+		}
 	</div>
 	<ul class="flex flex-wrap gap-4">
 		{
-			allTools.map(({ data }) => (
+			allTools.map((tool) => (
 				<li>
 					<Link
 						href=""
 						variant="secondary"
-						outline
 						rounded
 						size="xs"
-						classes="relative"
-						aria-pressed="true"
-						data-tool="t.id"
+						classes={cn(
+							"relative",
+							!filterItems.includes(tool.id) && "btn-outline"
+						)}
+						aria-pressed={filterItems.includes(tool.id)}
+						data-tool={tool.id}
 					>
-						{data.title}
-						<Icon
-							name="icon--close"
-							aria-hidden="true"
-							size={18}
-							class="bg-secondary text-secondary-content rounded-full absolute -top-2 -right-2 border-2 border-base-300"
-						/>
+						{tool.data.title}
+						{filterItems.includes(tool.id) && (
+							<Icon
+								name="icon--close"
+								aria-hidden="true"
+								size={18}
+								class="bg-secondary text-secondary-content rounded-full absolute -top-2 -right-2 border-2 border-base-300"
+							/>
+						)}
 					</Link>
 				</li>
 			))
