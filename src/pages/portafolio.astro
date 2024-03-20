@@ -5,9 +5,16 @@ import Features from "@components/portafolio/Features.astro";
 import Hero from "@components/portafolio/Hero.astro";
 
 import PortafolioLayout from "@layouts/PortafolioLayout.astro";
+
+const title = "Portafolio Karina";
+const description =
+	"Soy una diseñadora y desarrolladora autodidacta obsesionada con la calidad.";
 ---
 
-<PortafolioLayout>
+<PortafolioLayout
+	{title}
+	{description}
+>
 	<Hero />
 	<Features />
 	<Projects />

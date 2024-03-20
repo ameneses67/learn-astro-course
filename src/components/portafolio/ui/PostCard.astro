@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+
+import type { CollectionEntry } from "astro:content";
+
+import Heading from "@components/Heading.astro";
+import Link from "@components/portafolio/ui/Link.astro";
+
+interface Props {
+	postData: CollectionEntry<"posts">;
+}
+
+const { postData } = Astro.props;
+const { slug, data } = postData;
+const { title, description, image, pubDate } = data;
+---
+
+<article
+	aria-label={title}
+	class="card max-w-sm bg-base-100 shadow-xl overflow-hidden"
+>
+	<Image
+		src={image}
+		alt={title}
+		height={300}
+		format="avif"
+		class="w-full object-cover"
+	/>
+	<div class="card-body p-4">
+		<Heading
+			tagName="h2"
+			size="h6"
+			align="left"
+		>
+			{title}
+		</Heading>
+		<time class="text-xs text-accent">
+			{
+				pubDate.toLocaleDateString("es-MX", {
+					year: "numeric",
+					month: "long",
+					day: "numeric",
+				})
+			}
+		</time>
+		<p>{description}</p>
+		<div class="card-actions">
+			<Link
+				href={slug}
+				variant="primary"
+				rounded
+			>
+				Seguir leyendo
+			</Link>
+		</div>
+	</div>
+</article>
