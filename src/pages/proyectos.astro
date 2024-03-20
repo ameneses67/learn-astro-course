@@ -30,3 +30,43 @@ import ToolsFilter from "@components/portafolio/ui/ToolsFilter.astro";
 	</section>
 	<Contact />
 </PortafolioLayout>
+
+<script>
+	import { getSearchParamsAsArray, setNewUrlParams } from "@lib/utils";
+
+	const filters = document.querySelectorAll(
+		"[data-tool]"
+	) as NodeListOf<HTMLButtonElement>;
+	const clearAllBtn = document.querySelector("#clear-all");
+
+	clearAllBtn?.addEventListener("click", (e) => {
+		e.preventDefault();
+		window.location.href = "proyectos";
+	});
+
+	filters.forEach((filter) => {
+		filter.addEventListener("click", (e) => {
+			e.preventDefault();
+
+			const isPressed = filter.getAttribute("aria-pressed") === "true";
+			filter.setAttribute("aria-pressed", isPressed ? "false" : "true");
+
+			const existingParams = getSearchParamsAsArray(
+				new URL(window.location.href),
+				"tools"
+			);
+
+			const newParams = isPressed
+				? existingParams.filter((param) => param !== filter.dataset.tool)
+				: [...existingParams, filter.dataset.tool];
+
+			const newUrl = setNewUrlParams({
+				key: "tools",
+				url: new URL(window.location.href),
+				valueArray: newParams as string[],
+			});
+
+			window.location.assign(newUrl.toString());
+		});
+	});
+</script>
