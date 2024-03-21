@@ -11,8 +11,7 @@ interface Props {
 }
 
 const { postData } = Astro.props;
-const { slug, data } = postData;
-const { title, description, image, pubDate } = data;
+const { title, description, image, pubDate } = postData.data;
 ---
 
 <article
@@ -46,7 +45,7 @@ const { title, description, image, pubDate } = data;
 		<p>{description}</p>
 		<div class="card-actions">
 			<Link
-				href={slug}
+				href={`/${postData.slug}`}
 				variant="primary"
 				rounded
 			>

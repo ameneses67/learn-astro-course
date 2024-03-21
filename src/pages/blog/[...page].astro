@@ -1,0 +1,90 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+import PortafolioLayout from "@layouts/PortafolioLayout.astro";
+
+import Heading from "@components/Heading.astro";
+import PostCard from "@components/portafolio/ui/PostCard.astro";
+import Link from "@components/portafolio/ui/Link.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const allPosts = await getCollection("posts", ({ data }) => !data.isDraft);
+
+	return paginate(
+		allPosts.sort(
+			(a, b) =>
+				new Date(b.data.pubDate).getUTCDate() -
+				new Date(a.data.pubDate).getUTCDate()
+		),
+		{
+			pageSize: 2,
+		}
+	);
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+const title = "Blog";
+const description = "Artículos escritos por Karina Hernández";
+---
+
+<PortafolioLayout
+	{title}
+	{description}
+>
+	<section
+		class="py-16 sm:py-32 px-4 sm:px-16 space-y-16 sm:space-y-32 bg-base-300"
+	>
+		<Heading
+			tagName="h1"
+			size="h2"
+			align="center"
+			classes="max-w-sm sm:max-w-2xl mx-auto"
+		>
+			Mis Artículos
+			<p slot="subtitle">
+				Me gusta escribir sobre productividad, desarrollo web, diseño y sobre
+				trabajar con clientes. Ten una idea de cómo es trabajar conmigo y cuál
+				es mi proceso.
+			</p>
+		</Heading>
+		<div
+			aria-label="Artículos"
+			class="grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-8 max-w-7xl mx-auto"
+		>
+			{page.data.map((post) => <PostCard postData={post} />)}
+		</div>
+		<div
+			class="flex items-center justify-between max-w-sm md:max-w-7xl mx-auto"
+		>
+			{
+				page.url.prev && (
+					<Link
+						href={page.url.prev}
+						variant="secondary"
+						outline
+						rounded
+					>
+						<Icon name="radix-icons:arrow-left" />
+						Anterior
+					</Link>
+				)
+			}
+			{
+				page.url.next && (
+					<Link
+						href={page.url.next}
+						variant="secondary"
+						outline
+						rounded
+					>
+						Siguiente
+						<Icon name="radix-icons:arrow-right" />
+					</Link>
+				)
+			}
+		</div>
+	</section>
+</PortafolioLayout>
