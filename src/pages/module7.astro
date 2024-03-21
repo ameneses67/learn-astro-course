@@ -1,0 +1,39 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+
+import Karina from "@assets/avatar.jpg";
+
+const title = "Módulo 7";
+const description = "Optimización de imágenes";
+---
+
+<BaseLayout
+	{title}
+	{description}
+>
+	<p>Pública</p>
+	<Image
+		src="/avatar.jpg"
+		alt="Karina Hernández"
+		width={200}
+		height={200}
+	/>
+	<p>Local</p>
+	<Image
+		src={Karina}
+		alt="Karina Hernández"
+		width={200}
+	/>
+	<p>Remota</p>
+	<Image
+		src="https://images.unsplash.com/photo-1710766897518-c7df7d6cb226?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+		alt="changuito"
+		inferSize
+		width={200}
+	/>
+	<p class="text-sm">
+		La función para autorizar dominios para imágenes externas no funciona con el
+		adaptador de Netlify
+	</p>
+</BaseLayout>
