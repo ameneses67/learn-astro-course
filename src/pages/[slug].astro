@@ -1,0 +1,82 @@
+---
+import type { GetStaticPaths } from "astro";
+import { type CollectionEntry, getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+import PortafolioLayout from "@layouts/PortafolioLayout.astro";
+
+import Heading from "@components/Heading.astro";
+import Link from "@components/portafolio/ui/Link.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	post: CollectionEntry<"posts">;
+}
+
+export const getStaticPaths = (async () => {
+	const allPosts = await getCollection("posts", ({ data }) => !data.isDraft);
+	return allPosts.map((p) => ({
+		params: { slug: p.slug },
+		props: { post: p },
+	}));
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+
+const { post } = Astro.props;
+
+const { Content } = await post.render();
+
+const { title, description, image, pubDate } = post.data;
+---
+
+<PortafolioLayout
+	{title}
+	{description}
+>
+	<header
+		aria-label="Datos del artículo"
+		class="px-4 lg:px-0 py-8 sm:py-16"
+	>
+		<p class="text-sm text-accent text-center mb-4">
+			{
+				pubDate.toLocaleDateString("es-MX", {
+					year: "numeric",
+					month: "long",
+					day: "numeric",
+				})
+			}
+		</p>
+		<Heading
+			tagName="h1"
+			size="h1"
+			align="center"
+			classes="max-w-3xl mx-auto pb-8 sm:pb-16"
+		>
+			{title}
+			<p slot="subtitle">{description}</p>
+		</Heading>
+		<Image
+			src={image}
+			alt={title}
+			width={1000}
+			format="avif"
+			class="mx-auto rounded-lg shadow-lg"
+		/>
+	</header>
+	<article
+		aria-label="Contenido del artículo"
+		class="prose prose-lg sm:prose-xl mx-auto px-4 md:px-0"
+	>
+		<Content />
+	</article>
+	<Link
+		href="/blog"
+		variant="primary"
+		rounded
+		classes="mx-auto my-8 sm:my-16"
+	>
+		<Icon name="radix-icons:arrow-left" />
+		Volver al blog
+	</Link>
+</PortafolioLayout>

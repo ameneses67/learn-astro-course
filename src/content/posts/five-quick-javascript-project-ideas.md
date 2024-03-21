@@ -3,7 +3,7 @@ title: Five Quick JavaScript Project Ideas
 description: Let’s explore five quick JavaScript project ideas that you can build in a weekend.
 pubDate: 2024-01-08
 image: ./images/five-quick-javascript-project-ideas.jpg
-isDraft: true
+isDraft: false
 ---
 
 JavaScript is a versatile and powerful programming language that has gained immense popularity over the years. It is renowned for its ability to create dynamic, interactive, and feature-rich web applications. In this blog post, we will dive into five quick JavaScript project ideas that you can complete in a single weekend.

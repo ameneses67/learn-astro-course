@@ -24,6 +24,7 @@
 	},
 	"devDependencies": {
 		"@iconify-json/radix-icons": "^1.1.14",
+		"@tailwindcss/typography": "^0.5.10",
 		"daisyui": "^4.7.3"
 	}
 }
